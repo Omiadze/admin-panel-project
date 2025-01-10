@@ -9,8 +9,6 @@ export const useHttpInterceptor = () => {
   const navigate = useNavigate();
   const [isRefreshLoading, setIsRefreshLoading] = useState(false);
 
-  //   const { mutate: handleRefresh } = useRefresh();
-
   useEffect(() => {
     httpClient.interceptors.response.use(
       (res) => {
@@ -18,15 +16,16 @@ export const useHttpInterceptor = () => {
       },
       (resErr) => {
         const refreshToken = localStorage.getItem("refreshToken");
+        console.log(refreshToken);
         const userId = localStorage.getItem("userId");
 
         if (resErr.status === 401 && refreshToken) {
           setIsRefreshLoading(true);
-          refresh({ payload: { refresh: refreshToken } })
+          refresh({ payload: { refreshToken: refreshToken } })
             .then((res) => {
               AfterLoginSuccessn({
                 accessToken: res?.accessToken,
-                refreshToken: refreshToken,
+                refreshToken: res?.refreshToken,
                 userId: Number(userId),
               });
               queryClient.invalidateQueries({ queryKey: ["user"] });
