@@ -4,22 +4,38 @@ import { GetUsersResponse, User } from "./index.types";
 export const getUsers = async ({
   page,
   limit,
+  searchQuery = "",
 }: {
   page: number;
   limit: number;
+  searchQuery?: string;
 }): Promise<GetUsersResponse> => {
   const skip = (page - 1) * limit;
+  const searchParam = searchQuery ? `search?q=${searchQuery}` : "";
   try {
-    const result = await httpClient.get<{
-      users: User[];
-      total: number;
-    }>(`/users?limit=${limit}&skip=${skip}`);
-    console.log(result.data);
-    return {
-      users: result.data.users,
-      total: result.data.total,
-      totalPages: Math.ceil(result.data.total / limit),
-    };
+    if (searchParam != "") {
+      const result = await httpClient.get<{
+        users: User[];
+        total: number;
+      }>(`/users/${searchParam}`);
+      console.log(result.data);
+      return {
+        users: result.data.users,
+        total: result.data.total,
+        totalPages: Math.ceil(result.data.total / limit),
+      };
+    } else {
+      const result = await httpClient.get<{
+        users: User[];
+        total: number;
+      }>(`/users?limit=${limit}&skip=${skip}`);
+      console.log(result.data);
+      return {
+        users: result.data.users,
+        total: result.data.total,
+        totalPages: Math.ceil(result.data.total / limit),
+      };
+    }
   } catch (error) {
     console.log("Error:", error);
     throw new Error("Failed to fetch blogs");

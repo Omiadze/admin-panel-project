@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { deleteUserById, getUsers } from "@/api/users";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,19 +13,17 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Pencil } from "lucide-react";
 import { queryClient } from "@/main";
-import { useNavigate, useParams } from "react-router-dom";
-import { DASHBOARD_PATHS } from "@/routes/admin/index.enum";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import { Input } from "@/components/ui/input";
+import qs from "qs";
 
 const UsersPage = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const limit = 30;
-  const { lang } = useParams();
-
-  const { data, isLoading, error, isFetching } = useQuery({
-    queryKey: ["users", page],
-    queryFn: () => getUsers({ page, limit }),
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const parsedQueryParams = qs.parse(searchParams.toString());
 
   const { mutate: handleDelete } = useMutation({
     mutationKey: ["delete-user-by-id"],
@@ -36,9 +34,39 @@ const UsersPage = () => {
     },
   });
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  type SearchText = {
+    searchText: string;
+  };
+
+  const { control, watch } = useForm<SearchText>({
+    defaultValues: parsedQueryParams,
+  });
+
+  const searchQuery = watch("searchText");
+
+  const { data, isLoading, error, isFetching } = useQuery({
+    queryKey: ["users", page, searchQuery],
+    queryFn: () => getUsers({ page, limit, searchQuery }),
+  });
+
+  // const onSearchSubmit = (values: SearchText) => {
+  //   setSearchParams(
+  //     qs.stringify(values, {
+  //       skipNulls: true,
+  //       filter: (_, value) => {
+  //         return value || undefined;
+  //       },
+  //     })
+  //   );
+  //   console.log("Search values:", values);
+  // };
+  useEffect(() => {
+    if (searchQuery) {
+      setSearchParams(
+        qs.stringify({ searchText: searchQuery }, { skipNulls: true })
+      );
+    }
+  }, [searchQuery, setSearchParams]);
 
   if (error instanceof Error) {
     return <p>Error: {error.message}</p>;
@@ -49,75 +77,83 @@ const UsersPage = () => {
 
   return (
     <>
-      <div className="flex justify-start p-2 pl-8">
-        <Button
-          onClick={() => {
-            console.log(
-              `Navigating to: /${lang}/${DASHBOARD_PATHS.USERS_CREATE} `
+      <div className="flex  p-10">
+        <Controller
+          control={control}
+          name="searchText"
+          render={({ field: { onChange, value } }) => {
+            return (
+              <Input
+                onChange={onChange}
+                value={value}
+                placeholder="Enter search text.."
+              />
             );
-            navigate(`/${lang}/${DASHBOARD_PATHS.USERS_CREATE}`);
           }}
-          variant={"outline"}
-          className="border-dashed  justify-start border-primary text-primary"
-        >
-          ADD USER
-        </Button>
+        />
+        {/* <Button onClick={handleSearchSubmit(onSearchSubmit)}>Search</Button> */}
       </div>
-      <div>
-        <Table>
-          <TableCaption>A list of all users</TableCaption>
-          <TableHeader className="bg-secondary">
-            <TableRow>
-              <TableHead className="text-center">Name</TableHead>
-              <TableHead className="text-center">Email</TableHead>
-              <TableHead className="text-center">Age</TableHead>
-              <TableHead className="text-center">Role</TableHead>
-              <TableHead className="text-center">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell>{user.username}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.age}</TableCell>
-                <TableCell>{user.role}</TableCell>
-                <TableCell className="flex justify-center gap-3">
-                  <Button
-                    onClick={() => {
-                      navigate(`update/${user.id}`);
-                    }}
-                  >
-                    <Pencil />
-                  </Button>
-                  <Button onClick={() => handleDelete(user.id)}>Delete</Button>
-                </TableCell>
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+        <div>
+          <Table>
+            <TableCaption>A list of all users</TableCaption>
+            <TableHeader className="bg-secondary">
+              <TableRow>
+                <TableHead className="text-center">Name</TableHead>
+                <TableHead className="text-center">Email</TableHead>
+                <TableHead className="text-center">Age</TableHead>
+                <TableHead className="text-center">Role</TableHead>
+                <TableHead className="text-center">Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {users.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell>{user.username}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.age}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                  <TableCell className="flex justify-center gap-3">
+                    <Button
+                      onClick={() => {
+                        navigate(`update/${user.id}`);
+                      }}
+                    >
+                      <Pencil />
+                    </Button>
+                    <Button onClick={() => handleDelete(user.id)}>
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
 
-        {/* Pagination Controls */}
-        <div className="flex justify-between items-center mt-4">
-          <Button
-            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-            disabled={page === 1 || isFetching}
-          >
-            Previous
-          </Button>
-          <span>
-            Page {page} of {totalPages}
-          </span>
-          <Button
-            onClick={() =>
-              setPage((prev) => (prev < totalPages ? prev + 1 : prev))
-            }
-            disabled={page === totalPages || isFetching}
-          >
-            Next
-          </Button>
+          {/* Pagination Controls */}
+          <div className="flex justify-between items-center mt-4">
+            <Button
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+              disabled={page === 1 || isFetching}
+            >
+              Previous
+            </Button>
+            <span>
+              Page {page} of {totalPages}
+            </span>
+            <Button
+              onClick={() =>
+                setPage((prev) => (prev < totalPages ? prev + 1 : prev))
+              }
+              disabled={page === totalPages || isFetching}
+            >
+              Next
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

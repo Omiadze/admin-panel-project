@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import {
@@ -10,12 +10,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import LanguageSwitcher from "@/layouts/components/language";
 import { useTranslation } from "react-i18next";
-import { useAuthContext } from "@/context/hooks/use-auth-context";
+
+import { DASHBOARD_PATHS } from "@/routes/admin/index.enum";
 
 const DashboardHeader = () => {
   //   const navigate = useNavigate();
+  const { lang } = useParams();
+  const navigate = useNavigate();
   const { t } = useTranslation();
-  const { user } = useAuthContext();
+
   const userId = localStorage.getItem("userId");
 
   return (
@@ -44,14 +47,20 @@ const DashboardHeader = () => {
         <div className="flex justify-between items-center gap-3 p-4 rounded-lg">
           {userId ? (
             <>
-              <NavLink to="createQuestion  ">
+              <div className="flex justify-start p-2 pl-8">
                 <Button
+                  onClick={() => {
+                    console.log(
+                      `Navigating to: /${lang}/${DASHBOARD_PATHS.USERS_CREATE} `
+                    );
+                    navigate(`/${lang}/${DASHBOARD_PATHS.USERS_CREATE}`);
+                  }}
                   variant={"outline"}
-                  className="flex hover:scale-105 transition-all duration-300"
+                  className="border-dashed  justify-start border-primary text-primary"
                 >
-                  {user?.username}
+                  ADD USER
                 </Button>
-              </NavLink>
+              </div>
               <DropdownMenu>
                 <DropdownMenuTrigger className=" justify-center items-center flex border border-neutral-200  rounded-full  hover:scale-105 transition-all duration-300 cursor-pointer"></DropdownMenuTrigger>
 
@@ -106,7 +115,6 @@ const DashboardHeader = () => {
                 <NavLink to="login">
                   <DropdownMenuItem>{t("sign-in")}</DropdownMenuItem>
                 </NavLink>
-                {/* <DropdownMenuItem>Add Question</DropdownMenuItem> only appears if user is logged in */}
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
