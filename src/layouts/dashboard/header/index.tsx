@@ -68,7 +68,7 @@ const DashboardHeader = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="flex justify-center">
                     <DropdownMenuItem className="text-center">
-                      <Button onClick={handleSignOut}>Sign Out</Button>
+                      <Button onClick={handleSignOut}>{t("sign-out")}</Button>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -85,7 +85,7 @@ const DashboardHeader = () => {
                   variant={"outline"}
                   className="border-dashed  justify-start border-primary text-primary"
                 >
-                  ADD USER
+                  {t("add-user")}
                 </Button>
               </div>
             </>

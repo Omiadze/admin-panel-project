@@ -15,7 +15,7 @@ const Login: React.FC = () => {
       <Card className="w-[370px] ">
         <CardHeader>
           <CardTitle>
-            <h1>ADMIN </h1>
+            <h1>{t("admin-panel")} </h1>
           </CardTitle>
           <CardDescription>{t("enter-details")} </CardDescription>
         </CardHeader>

@@ -17,6 +17,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import qs from "qs";
+import { t } from "i18next";
 
 const UsersPage = () => {
   const navigate = useNavigate();
@@ -86,7 +87,7 @@ const UsersPage = () => {
               <Input
                 onChange={onChange}
                 value={value}
-                placeholder="Enter search text.."
+                placeholder={t("enter-search-text")}
               />
             );
           }}
@@ -101,11 +102,11 @@ const UsersPage = () => {
             <TableCaption>A list of all users</TableCaption>
             <TableHeader className="bg-secondary">
               <TableRow>
-                <TableHead className="text-center">Name</TableHead>
-                <TableHead className="text-center">Email</TableHead>
-                <TableHead className="text-center">Age</TableHead>
-                <TableHead className="text-center">Role</TableHead>
-                <TableHead className="text-center">Actions</TableHead>
+                <TableHead className="text-center">{t("name")}</TableHead>
+                <TableHead className="text-center">{t("email")}</TableHead>
+                <TableHead className="text-center">{t("age")}</TableHead>
+                <TableHead className="text-center">{t("role")}</TableHead>
+                <TableHead className="text-center">{t("actions")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -124,7 +125,7 @@ const UsersPage = () => {
                       <Pencil />
                     </Button>
                     <Button onClick={() => handleDelete(user.id)}>
-                      Delete
+                      {t("delete")}
                     </Button>
                   </TableCell>
                 </TableRow>

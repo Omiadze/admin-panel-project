@@ -136,7 +136,7 @@ const CreateUserForm = () => {
 
       <div className="flex justify-between">
         <Button className="w-full " type="submit">
-          {t("Add-user")}
+          {t("add-user")}
         </Button>
       </div>
     </form>

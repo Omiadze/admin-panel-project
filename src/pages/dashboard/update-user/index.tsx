@@ -1,23 +1,17 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { t } from "i18next";
 import UpdateUSerForm from "./update-user-form";
+import { useTranslation } from "react-i18next";
 
 const UpdateUserPage = () => {
+  const { t } = useTranslation();
   return (
     <div className="flex items-center justify-center h-full  py-24 sm:h-screen sm:p-0    ">
       <Card className="w-[370px] ">
         <CardHeader>
           <CardTitle>
-            <h1>Update User </h1>
+            <h1>{t("enter-details-update-user")}</h1>
           </CardTitle>
-          <CardDescription>{t("enter-details")} </CardDescription>
         </CardHeader>
         <CardContent>
           <UpdateUSerForm />

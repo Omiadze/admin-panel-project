@@ -4,14 +4,15 @@ import UsersPage from "@/pages/dashboard/users-page";
 import DashboardLayout from "@/layouts/dashboard";
 import CreateUserPage from "@/pages/dashboard/create-user";
 import UpdateUserPage from "@/pages/dashboard/update-user";
+import AdminGuard from "@/components/route-guards/dashboard";
 
 export const DASHBOARD_ROUTES = [
   <Route
     path=":lang"
     element={
-      //   <AdminGuard>
-      <DashboardLayout />
-      //   </AdminGuard>
+      <AdminGuard>
+        <DashboardLayout />
+      </AdminGuard>
     }
   >
     {/* Users Routes */}
