@@ -10,8 +10,6 @@ function AppRoutes() {
 
       {...ADMIN_ROUTES}
 
-      {/* Dashboard Layout */}
-
       {/* Catch-All Route */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
