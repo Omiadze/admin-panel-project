@@ -4,6 +4,7 @@ export type User = {
   id: number;
   role: string;
   username: string;
+  image: string;
 };
 export type GetUsersResponse = {
   users: User[];

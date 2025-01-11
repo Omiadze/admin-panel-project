@@ -11,15 +11,26 @@ import {
 import LanguageSwitcher from "@/layouts/components/language";
 import { useTranslation } from "react-i18next";
 
-import { DASHBOARD_PATHS } from "@/routes/admin/index.enum";
+import { AUTH_PATHS, DASHBOARD_PATHS } from "@/routes/admin/index.enum";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuthContext } from "@/context/hooks/use-auth-context";
 
 const DashboardHeader = () => {
-  //   const navigate = useNavigate();
+  const { user } = useAuthContext();
   const { lang } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  console.log(user);
 
   const userId = localStorage.getItem("userId");
+
+  const handleSignOut = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("userId");
+    navigate(AUTH_PATHS.LOGIN);
+  };
 
   return (
     <div className="z-50 dark:bg-black  overflow-hidden  sticky top-0 left-0 w-full   bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
@@ -47,6 +58,22 @@ const DashboardHeader = () => {
         <div className="flex justify-between items-center gap-3 p-4 rounded-lg">
           {userId ? (
             <>
+              <div className="rounded-full overflow-hidden">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <Avatar className="rounded-full border-2 border-primary">
+                      <AvatarImage className="rounded-full" src={user?.image} />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="flex justify-center">
+                    <DropdownMenuItem className="text-center">
+                      <Button onClick={handleSignOut}>Sign Out</Button>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
               <div className="flex justify-start p-2 pl-8">
                 <Button
                   onClick={() => {
@@ -61,25 +88,6 @@ const DashboardHeader = () => {
                   ADD USER
                 </Button>
               </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger className=" justify-center items-center flex border border-neutral-200  rounded-full  hover:scale-105 transition-all duration-300 cursor-pointer"></DropdownMenuTrigger>
-
-                <DropdownMenuContent className="shadow-md border  border-neutral-200 mt-4 rounded-md  p-2 gap-2 flex justify-center items-center flex-col ">
-                  <DropdownMenuItem className="p-0">
-                    <NavLink to="/profile">
-                      <Button variant="ghost" className="w-full  px-6">
-                        {t("profile")}
-                      </Button>
-                    </NavLink>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem className="p-0">
-                    <Button variant="ghost" className="w-full ">
-                      {t("logout")}
-                    </Button>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
             </>
           ) : (
             <div>
@@ -112,7 +120,7 @@ const DashboardHeader = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuSeparator />
-                <NavLink to="login">
+                <NavLink to={AUTH_PATHS.LOGIN}>
                   <DropdownMenuItem>{t("sign-in")}</DropdownMenuItem>
                 </NavLink>
               </DropdownMenuContent>
