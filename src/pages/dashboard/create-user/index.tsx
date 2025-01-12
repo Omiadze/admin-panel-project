@@ -1,8 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CreateUserForm from "./create-user-form";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
-const CreateUserPage = () => {
+const CreateUserPage: React.FC = () => {
+  const { t } = useTranslation(); // Add this line
+
   return (
     <div className="flex items-center justify-center h-full  py-24 sm:h-screen sm:p-0    ">
       <Card className="w-[370px] ">

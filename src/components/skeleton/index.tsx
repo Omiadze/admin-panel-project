@@ -1,5 +1,5 @@
 const Skeleton = () => {
-  return <div>index</div>;
+  return <div>Skeleton</div>;
 };
 
 export default Skeleton;

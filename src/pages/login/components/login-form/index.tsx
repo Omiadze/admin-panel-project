@@ -6,14 +6,11 @@ import { LoginDefaultValues } from "../login-default-values";
 import { LoginFormValues } from "../types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "./schema";
-// import { Label } from "@radix-ui/react-label";
 import { Label } from "@radix-ui/react-label";
 import { useTranslation } from "react-i18next";
-import { Login } from "@/api/auth";
-import { useMutation } from "@tanstack/react-query";
-// import { AfterLoginSuccessn } from "../utils";
 import { queryClient } from "@/main";
 import { AfterLoginSuccessn } from "../utils";
+import { useLogin } from "@/react-query/mutation/auth";
 
 const LoginForm: React.FC = () => {
   const {
@@ -24,25 +21,21 @@ const LoginForm: React.FC = () => {
     resolver: zodResolver(LoginFormSchema),
     defaultValues: LoginDefaultValues,
   });
+
   const navigate = useNavigate();
   const { t } = useTranslation();
   const location = useLocation();
   const toNavigate =
     location?.state?.from?.pathname + location?.state?.from?.search || "/";
 
-  const { mutate: handleLogin } = useMutation({
-    mutationKey: ["login"],
-    mutationFn: Login,
-    onSuccess: (res) => {
-      console.log(res.accessToken);
-      AfterLoginSuccessn({
-        accessToken: res?.accessToken,
-        refreshToken: res?.refreshToken,
-        userId: res?.id,
-      });
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-      setTimeout(() => navigate(toNavigate), 0);
-    },
+  const { mutate: handleLogin } = useLogin((res) => {
+    AfterLoginSuccessn({
+      accessToken: res?.accessToken,
+      refreshToken: res?.refreshToken,
+      userId: res?.id,
+    });
+    queryClient.invalidateQueries({ queryKey: ["user"] });
+    setTimeout(() => navigate(toNavigate), 0);
   });
 
   const onSubmit = (values: LoginFormValues) => {
@@ -51,12 +44,11 @@ const LoginForm: React.FC = () => {
       return;
     }
     handleLogin(values);
-    console.log(values);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-6">
-      {/* მეილი */}
+      {/* Username */}
       <div className="flex flex-col space-y-1.5">
         <Label
           htmlFor="username"
@@ -83,7 +75,7 @@ const LoginForm: React.FC = () => {
           </p>
         )}
       </div>
-      {/* პაროლი */}
+      {/* Password */}
       <div className="flex flex-col space-y-1.5">
         <Label
           htmlFor="password"
@@ -109,7 +101,6 @@ const LoginForm: React.FC = () => {
           </p>
         )}
       </div>
-      {/*დალოგინება/რეგისტრაციაზე გადასვლა */}
       <div className="flex justify-between">
         <Button className="w-full " type="submit">
           {t("sign-in")}

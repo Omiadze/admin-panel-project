@@ -16,7 +16,15 @@
     "password-min-length": "Password must be at least 6 characters long",
     "password-max-length": "Password cannot exceed 20 characters",
     "username-required": "Username is required",
+    "age-required": "Age is required",
+    "role-required": "Role is required",
     "default-error": "Error"
+  },
+  "delete_confirmation": {
+    "warning": "This action cannot be undone.",
+    "description": "This will permanently delete the user. Are you absolutely sure?",
+    "cancel": "Cancel",
+    "continue": "Continue"
   },
   "sign-in-title": "Log in to ANONYMOUS",
   "sign-in-subtitle": "Enter your credentials to access your account",
@@ -51,5 +59,9 @@
   "username-placeholder": "Enter your username",
   "age-placeholder": "Enter your age",
   "role-placeholder": "Enter user role",
-  "enter-search-text": "Enter search text"
+  "enter-search-text": "Enter search text...",
+  "no-users-found": "No Users Found",
+  "try-different-search": "Try Different Search",
+  "request-error": "An error occurred while processing the request.",
+  "request-success": "The request was completed successfully."
 }

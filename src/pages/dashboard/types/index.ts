@@ -4,3 +4,7 @@ export type UpdateOrCreateUserFormValues = {
   age: string | undefined;
   role: string | undefined;
 };
+
+export type SearchText = {
+  searchText: string;
+};

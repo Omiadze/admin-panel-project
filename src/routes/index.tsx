@@ -5,7 +5,6 @@ import NotFoundPage from "@/pages/404";
 function AppRoutes() {
   return (
     <Routes>
-      {/* Authentication Layout */}
       <Route path="/" element={<Navigate to={"/en/users"} />} />
 
       {...ADMIN_ROUTES}

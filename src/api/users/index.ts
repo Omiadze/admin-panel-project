@@ -38,7 +38,7 @@ export const getUsers = async ({
     }
   } catch (error) {
     console.log("Error:", error);
-    throw new Error("Failed to fetch blogs");
+    throw new Error("Failed to fetch users");
   }
 };
 
@@ -52,7 +52,7 @@ export const getSingleUser = async (id: string | undefined) => {
     return result.data;
   } catch (error) {
     console.log("Error:", error);
-    throw new Error("Failed to fetch blogs");
+    throw new Error("Failed to fetch user");
   }
 };
 
@@ -62,7 +62,7 @@ export const deleteUserById = async ({ id }: { id: number }) => {
     console.log(result.data);
   } catch (error) {
     console.log("Error:", error);
-    throw new Error("Failed to fetch blogs");
+    throw new Error("Failed to delete user");
   }
 };
 
@@ -73,7 +73,7 @@ export const addNewUser = async (payload: any) => {
     console.log(result.data);
   } catch (error) {
     console.log("Error:", error);
-    throw new Error("Failed to fetch blogs");
+    throw new Error("Failed to add user");
   }
 };
 
@@ -84,6 +84,6 @@ export const updateUser = async (id: string | undefined, payload: any) => {
     console.log(result.data);
   } catch (error) {
     console.log("Error:", error);
-    throw new Error("Failed to fetch blogs");
+    throw new Error("Failed to update user");
   }
 };

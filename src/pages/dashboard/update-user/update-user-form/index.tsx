@@ -5,18 +5,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { UpdateOrCreateUserFormValues } from "../../types";
 import { UpdateAndCreateUserFormSchema } from "../../schema";
-import { t } from "i18next";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getSingleUser, updateUser } from "@/api/users";
+import { useToast } from "@/hooks/use-toast";
+import Loading from "@/components/loading";
+import { useUpdateUser } from "@/react-query/mutation/users";
+import { useSingleUser } from "@/react-query/query";
+import { useTranslation } from "react-i18next";
+import { Toaster } from "@/components/ui/toaster";
 
-const UpdateUSerForm = () => {
+const UpdateUSerForm: React.FC = () => {
+  const { t } = useTranslation();
+  const { toast } = useToast();
   const { id } = useParams();
-  const { data: singleUser, isLoading } = useQuery({
-    queryKey: ["users", id],
-    queryFn: () => getSingleUser(id),
-    enabled: !!id,
-  });
+  const { data: singleUser, isLoading } = useSingleUser(id);
 
   const {
     control,
@@ -33,30 +34,30 @@ const UpdateUSerForm = () => {
     values: singleUser, // Dynamically update form values when `singleUser` changes
   });
 
-  console.log("id", id);
-
-  console.log("singleUSer", singleUser);
-
-  const { mutate: handleUpdateUser } = useMutation({
-    mutationKey: ["update-user"],
-    mutationFn: (payload: UpdateOrCreateUserFormValues) =>
-      updateUser(id, payload),
-  });
+  const { mutate: handleUpdateUser } = useUpdateUser(
+    id,
+    () => {
+      alert(t("request-success"));
+    },
+    () => {
+      alert(t("request-error"));
+    }
+  );
 
   const onSubmit = (values: UpdateOrCreateUserFormValues) => {
-    console.log(values);
     handleUpdateUser(values);
   };
+
   if (isLoading) {
-    return <p>{t("loading")}</p>;
+    return <Loading />;
   }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-6">
       <div className="flex flex-col space-y-1.5">
         <Label
           htmlFor="username"
-          className="
-      text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
           {t("username")}
         </Label>
@@ -156,7 +157,15 @@ const UpdateUSerForm = () => {
       </div>
 
       <div className="flex justify-between">
-        <Button className="w-full " type="submit">
+        <Button
+          onClick={() => {
+            toast({
+              description: "Your message has been sent.",
+            });
+          }}
+          className="w-full "
+          type="submit"
+        >
           {t("update-user")}
         </Button>
       </div>

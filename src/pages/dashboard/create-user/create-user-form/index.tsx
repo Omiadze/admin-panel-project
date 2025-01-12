@@ -6,11 +6,12 @@ import { Controller, useForm } from "react-hook-form";
 import { UpdateOrCreateUserFormValues } from "../../types";
 import { UpdateAndCreateUserFormSchema } from "../../schema";
 import { CreateUserDefaultValues } from "../create-user-default-values";
-import { t } from "i18next";
-import { useMutation } from "@tanstack/react-query";
-import { addNewUser } from "@/api/users";
+import { useAddUser } from "@/react-query/mutation/users";
+import { useTranslation } from "react-i18next";
 
-const CreateUserForm = () => {
+const CreateUserForm: React.FC = () => {
+  const { t } = useTranslation(); // Add this line
+
   const {
     control,
     handleSubmit,
@@ -20,22 +21,26 @@ const CreateUserForm = () => {
     defaultValues: CreateUserDefaultValues,
   });
 
-  const { mutate: handleAddUser } = useMutation({
-    mutationKey: ["add-user"],
-    mutationFn: addNewUser,
-  });
+  const { mutate: handleAddUser } = useAddUser(
+    () => {
+      alert(t("request-success"));
+    },
+    () => {
+      alert(t("request-error"));
+    }
+  );
 
   const onSubmit = (values: UpdateOrCreateUserFormValues) => {
     console.log(values);
     handleAddUser(values);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-6">
       <div className="flex flex-col space-y-1.5">
         <Label
           htmlFor="username"
-          className="
-      text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
           {t("username")}
         </Label>
