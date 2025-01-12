@@ -1,50 +1,79 @@
-# React + TypeScript + Vite
+# Admin Panel - Front-End Developer Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project is a fully responsive Admin Panel that implements basic CRUD functionalities and data visualization. The application includes user authentication, management, search functionality, pagination, theme switching, language translation, and a clean UI built with React, TypeScript, Tailwind CSS, and Shadcn UI. 🚀😊
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
 
-## Expanding the ESLint configuration
+- **React** (with TypeScript)
+- **Vite** (for faster build times)
+- **Tailwind CSS** (for styling)
+- **Shadcn UI** (for UI components)
+- **HTTP Client**: Axios
+- **React Query & Mutation** (for data fetching and handling CRUD operations)
+- **Zod** (for form validation)
+- **React Router Dom** (for routing)
+- **Husky**
+- **JWT Authentication** (for login and user authorization)
+- **React Context API**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+### User Authentication:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+- Login page with username and password authentication.
+- Access and refresh token management.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### User Management (CRUD functionality):
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
+- List users with details (name, email, age, and status).
+- Add, edit, and delete users using separate form page.
+- Note: Since the API used in this project is public and doesn't update dynamically, the visual list of users won't reflect changes after adding, updating, or deleting a user. However, all CRUD operations are simulated using React Query and React Mutation, handling requests as if they were successful.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
-```
+### Additional Features:
+
+- Search functionality for users.
+- Pagination for the user list.
+- Theme change functionality (light and dark modes).
+- Language translation between English and Georgian for static data.
+
+## Project Setup
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+- Node.js (version 16 or higher)
+- npm or yarn
+
+# Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repository/admin-panel-project.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd admin-panel-project
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+# Usage
+
+1.  Open the application in your browser (default URL: `http://localhost:5173`).
+2.  log in to access full functionality. Use this dummy Data to fill username and password: `https://dummyjson.com/users`
+3.  Explore users, add, update and delete on your own.
+4.  Switch between English and Georgian languages as needed.
+5.  Toggle dark mode for a comfortable user experience.
+
+# Live Site
+
+Access the live application at [Admin-Panel](https://admin-panel-site-7.netlify.app/en/login).
