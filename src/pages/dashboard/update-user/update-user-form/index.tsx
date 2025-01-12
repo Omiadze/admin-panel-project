@@ -1,17 +1,16 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
-import { UpdateOrCreateUserFormValues } from "../../types";
-import { UpdateAndCreateUserFormSchema } from "../../schema";
-import { useParams } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
-import Loading from "@/components/loading";
-import { useUpdateUser } from "@/react-query/mutation/users";
-import { useSingleUser } from "@/react-query/query";
-import { useTranslation } from "react-i18next";
-import { Toaster } from "@/components/ui/toaster";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
+import { UpdateOrCreateUserFormValues } from '../../types';
+import { UpdateAndCreateUserFormSchema } from '../../schema';
+import { useParams } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
+import Loading from '@/components/loading';
+import { useUpdateUser } from '@/react-query/mutation/users';
+import { useSingleUser } from '@/react-query/query';
+import { useTranslation } from 'react-i18next';
 
 const UpdateUSerForm: React.FC = () => {
   const { t } = useTranslation();
@@ -26,10 +25,10 @@ const UpdateUSerForm: React.FC = () => {
   } = useForm<UpdateOrCreateUserFormValues>({
     resolver: zodResolver(UpdateAndCreateUserFormSchema),
     defaultValues: {
-      username: singleUser?.username || "",
-      email: singleUser?.email || "",
-      age: singleUser?.age || "",
-      role: singleUser?.role || "",
+      username: singleUser?.username || '',
+      email: singleUser?.email || '',
+      age: singleUser?.age || '',
+      role: singleUser?.role || '',
     },
     values: singleUser, // Dynamically update form values when `singleUser` changes
   });
@@ -37,11 +36,11 @@ const UpdateUSerForm: React.FC = () => {
   const { mutate: handleUpdateUser } = useUpdateUser(
     id,
     () => {
-      alert(t("request-success"));
+      alert(t('request-success'));
     },
     () => {
-      alert(t("request-error"));
-    }
+      alert(t('request-error'));
+    },
   );
 
   const onSubmit = (values: UpdateOrCreateUserFormValues) => {
@@ -59,7 +58,7 @@ const UpdateUSerForm: React.FC = () => {
           htmlFor="username"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("username")}
+          {t('username')}
         </Label>
         <Controller
           name="username"
@@ -68,7 +67,7 @@ const UpdateUSerForm: React.FC = () => {
             <Input
               id="username"
               type="text"
-              placeholder={t("username-placeholder")}
+              placeholder={t('username-placeholder')}
               {...field}
             />
           )}
@@ -85,7 +84,7 @@ const UpdateUSerForm: React.FC = () => {
           htmlFor="email"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("email")}
+          {t('email')}
         </Label>
         <Controller
           name="email"
@@ -94,7 +93,7 @@ const UpdateUSerForm: React.FC = () => {
             <Input
               id="email"
               type="email"
-              placeholder={t("email-placeholder")}
+              placeholder={t('email-placeholder')}
               {...field}
             />
           )}
@@ -110,7 +109,7 @@ const UpdateUSerForm: React.FC = () => {
           htmlFor="age"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("age")}
+          {t('age')}
         </Label>
         <Controller
           name="age"
@@ -119,7 +118,7 @@ const UpdateUSerForm: React.FC = () => {
             <Input
               id="age"
               type="number"
-              placeholder={t("age-placeholder")}
+              placeholder={t('age-placeholder')}
               {...field}
             />
           )}
@@ -135,7 +134,7 @@ const UpdateUSerForm: React.FC = () => {
           htmlFor="role"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("role")}
+          {t('role')}
         </Label>
         <Controller
           name="role"
@@ -144,7 +143,7 @@ const UpdateUSerForm: React.FC = () => {
             <Input
               id="role"
               type="text"
-              placeholder={t("role-placeholder")}
+              placeholder={t('role-placeholder')}
               {...field}
             />
           )}
@@ -160,13 +159,13 @@ const UpdateUSerForm: React.FC = () => {
         <Button
           onClick={() => {
             toast({
-              description: "Your message has been sent.",
+              description: 'Your message has been sent.',
             });
           }}
           className="w-full "
           type="submit"
         >
-          {t("update-user")}
+          {t('update-user')}
         </Button>
       </div>
     </form>

@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import UpdateUSerForm from "./update-user-form";
-import { useTranslation } from "react-i18next";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import UpdateUSerForm from './update-user-form';
+import { useTranslation } from 'react-i18next';
 
 const UpdateUserPage: React.FC = () => {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ const UpdateUserPage: React.FC = () => {
       <Card className="w-[370px] ">
         <CardHeader>
           <CardTitle>
-            <h1>{t("enter-details-update-user")}</h1>
+            <h1>{t('enter-details-update-user')}</h1>
           </CardTitle>
         </CardHeader>
         <CardContent>

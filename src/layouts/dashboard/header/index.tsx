@@ -1,26 +1,26 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/mode-toggle";
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { ModeToggle } from '@/components/mode-toggle';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import LanguageSwitcher from "@/layouts/components/language";
-import { useTranslation } from "react-i18next";
-import { AUTH_PATHS, DASHBOARD_PATHS } from "@/routes/admin/index.enum";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useAuthContext } from "@/context/hooks/use-auth-context";
-import { AfterSignOut } from "@/layouts/components/utils/after-sign-out";
-import LogoSvg from "@/layouts/components/logo-svg";
+} from '@/components/ui/dropdown-menu';
+import LanguageSwitcher from '@/layouts/components/language';
+import { useTranslation } from 'react-i18next';
+import { AUTH_PATHS, DASHBOARD_PATHS } from '@/routes/admin/index.enum';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useAuthContext } from '@/context/hooks/use-auth-context';
+import { AfterSignOut } from '@/layouts/components/utils/after-sign-out';
+import LogoSvg from '@/layouts/components/logo-svg';
 
 const DashboardHeader = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem('userId');
 
   const handleSignOut = () => {
     AfterSignOut();
@@ -52,8 +52,8 @@ const DashboardHeader = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="flex justify-center">
                       <DropdownMenuItem className="text-center">
-                        <Button variant={"link"} onClick={handleSignOut}>
-                          {t("sign-out")}
+                        <Button variant={'link'} onClick={handleSignOut}>
+                          {t('sign-out')}
                         </Button>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -63,10 +63,10 @@ const DashboardHeader = () => {
                 <div className="flex justify-start p-2 pl-8">
                   <NavLink to={DASHBOARD_PATHS.USERS_CREATE}>
                     <Button
-                      variant={"outline"}
+                      variant={'outline'}
                       className="border-dashed  justify-start border-primary text-primary hover:text-primary"
                     >
-                      {t("add-user")}
+                      {t('add-user')}
                     </Button>
                   </NavLink>
                 </div>
@@ -75,7 +75,7 @@ const DashboardHeader = () => {
           ) : (
             <div>
               <NavLink to="login" className="hidden md:block ">
-                <Button className="text-base font-sans">{t("sign-in")}</Button>
+                <Button className="text-base font-sans">{t('sign-in')}</Button>
               </NavLink>
             </div>
           )}
@@ -103,13 +103,13 @@ const DashboardHeader = () => {
             <DropdownMenuContent>
               <NavLink to={DASHBOARD_PATHS.USERS_CREATE}>
                 <DropdownMenuItem className="cursor-pointer flex justify-center">
-                  {t("add-user")}
+                  {t('add-user')}
                 </DropdownMenuItem>
               </NavLink>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="flex justify-center">
                 <Button
-                  variant={"link"}
+                  variant={'link'}
                   className="text-center"
                   onClick={handleSignOut}
                 >
@@ -117,7 +117,7 @@ const DashboardHeader = () => {
                     <AvatarImage className="rounded-full" src={user?.image} />
                     <AvatarFallback>{user?.username}</AvatarFallback>
                   </Avatar>
-                  {t("sign-out")}
+                  {t('sign-out')}
                 </Button>
               </DropdownMenuItem>
             </DropdownMenuContent>

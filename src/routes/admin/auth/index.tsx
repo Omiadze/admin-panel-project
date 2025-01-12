@@ -1,11 +1,11 @@
-import { Route } from "react-router-dom";
-import Login from "@/pages/login";
-import { AUTH_PATHS } from "../index.enum";
-import { lazy, Suspense } from "react";
-import AuthGuard from "@/components/route-guards/auth";
-import Loading from "@/components/loading";
+import { Route } from 'react-router-dom';
+import Login from '@/pages/login';
+import { AUTH_PATHS } from '../index.enum';
+import { lazy, Suspense } from 'react';
+import AuthGuard from '@/components/route-guards/auth';
+import Loading from '@/components/loading';
 
-const AuthLayout = lazy(() => import("@/layouts/auth"));
+const AuthLayout = lazy(() => import('@/layouts/auth'));
 
 export const AUTH_ROUTES = [
   <Route

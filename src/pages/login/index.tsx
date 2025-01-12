@@ -4,9 +4,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import LoginForm from "./components/login-form";
-import { useTranslation } from "react-i18next";
+} from '@/components/ui/card';
+import LoginForm from './components/login-form';
+import { useTranslation } from 'react-i18next';
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
@@ -15,9 +15,9 @@ const Login: React.FC = () => {
       <Card className="w-[370px] ">
         <CardHeader>
           <CardTitle>
-            <h1>{t("admin-panel")} </h1>
+            <h1>{t('admin-panel')} </h1>
           </CardTitle>
-          <CardDescription>{t("enter-details")} </CardDescription>
+          <CardDescription>{t('enter-details')} </CardDescription>
         </CardHeader>
         <CardContent>
           <LoginForm />

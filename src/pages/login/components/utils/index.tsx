@@ -1,4 +1,4 @@
-import { setAuthorizationHeader } from "@/api";
+import { setAuthorizationHeader } from '@/api';
 
 export const AfterLoginSuccessn = ({
   accessToken,
@@ -9,8 +9,8 @@ export const AfterLoginSuccessn = ({
   refreshToken: string | undefined;
   userId: number | null | undefined;
 }) => {
-  localStorage.setItem("accessToken", accessToken || "");
-  localStorage.setItem("refreshToken", refreshToken || "");
-  localStorage.setItem("userId", userId?.toString() || "");
+  localStorage.setItem('accessToken', accessToken || '');
+  localStorage.setItem('refreshToken', refreshToken || '');
+  localStorage.setItem('userId', userId?.toString() || '');
   setAuthorizationHeader(`Bearer ${accessToken}`);
 };

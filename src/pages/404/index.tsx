@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { NavLink } from "react-router-dom";
-import LostImg from "@/assets/lost.jpg";
+import { Button } from '@/components/ui/button';
+import { NavLink } from 'react-router-dom';
+import LostImg from '@/assets/lost.jpg';
 
 export default function NotFoundPage() {
   return (
@@ -11,7 +11,7 @@ export default function NotFoundPage() {
         height="300"
         alt="Illustration"
         className="rounded-xl object-cover"
-        style={{ aspectRatio: "400/300", objectFit: "cover" }}
+        style={{ aspectRatio: '400/300', objectFit: 'cover' }}
       />
       <div className="container flex flex-col items-center justify-center gap-2 px-4 md:gap-4 lg:gap-6">
         <div className="space-y-2 flex justify-center items-center flex-col">
@@ -24,10 +24,10 @@ export default function NotFoundPage() {
           </p>
         </div>
         <NavLink
-          to={"/"}
+          to={'/'}
           className="inline-flex h-9 items-center rounded-md border"
         >
-          <Button variant={"destructive"}>Go back home</Button>
+          <Button variant={'destructive'}>Go back home</Button>
         </NavLink>
       </div>
     </section>

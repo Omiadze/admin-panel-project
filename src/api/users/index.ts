@@ -1,19 +1,19 @@
-import { httpClient } from "..";
-import { GetUsersResponse, User } from "./index.types";
+import { httpClient } from '..';
+import { GetUsersResponse, User } from './index.types';
 
 export const getUsers = async ({
   page,
   limit,
-  searchQuery = "",
+  searchQuery = '',
 }: {
   page: number;
   limit: number;
   searchQuery?: string;
 }): Promise<GetUsersResponse> => {
   const skip = (page - 1) * limit;
-  const searchParam = searchQuery ? `search?q=${searchQuery}` : "";
+  const searchParam = searchQuery ? `search?q=${searchQuery}` : '';
   try {
-    if (searchParam != "") {
+    if (searchParam != '') {
       const result = await httpClient.get<{
         users: User[];
         total: number;
@@ -37,22 +37,22 @@ export const getUsers = async ({
       };
     }
   } catch (error) {
-    console.log("Error:", error);
-    throw new Error("Failed to fetch users");
+    console.log('Error:', error);
+    throw new Error('Failed to fetch users');
   }
 };
 
 export const getSingleUser = async (id: string | undefined) => {
   try {
     if (!id) {
-      throw new Error("User ID is undefined");
+      throw new Error('User ID is undefined');
     }
-    console.log("payload", id);
+    console.log('payload', id);
     const result = await httpClient.get(`/users/${id}`);
     return result.data;
   } catch (error) {
-    console.log("Error:", error);
-    throw new Error("Failed to fetch user");
+    console.log('Error:', error);
+    throw new Error('Failed to fetch user');
   }
 };
 
@@ -61,29 +61,29 @@ export const deleteUserById = async ({ id }: { id: number }) => {
     const result = await httpClient.delete(`/users/${id}`);
     console.log(result.data);
   } catch (error) {
-    console.log("Error:", error);
-    throw new Error("Failed to delete user");
+    console.log('Error:', error);
+    throw new Error('Failed to delete user');
   }
 };
 
 export const addNewUser = async (payload: any) => {
   try {
-    console.log("payload", payload);
+    console.log('payload', payload);
     const result = await httpClient.post(`/users/add`, payload);
     console.log(result.data);
   } catch (error) {
-    console.log("Error:", error);
-    throw new Error("Failed to add user");
+    console.log('Error:', error);
+    throw new Error('Failed to add user');
   }
 };
 
 export const updateUser = async (id: string | undefined, payload: any) => {
   try {
-    console.log("payload", id);
+    console.log('payload', id);
     const result = await httpClient.put(`/users/${id}`, payload);
     console.log(result.data);
   } catch (error) {
-    console.log("Error:", error);
-    throw new Error("Failed to update user");
+    console.log('Error:', error);
+    throw new Error('Failed to update user');
   }
 };

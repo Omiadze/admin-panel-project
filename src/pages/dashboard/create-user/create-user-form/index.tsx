@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
-import { UpdateOrCreateUserFormValues } from "../../types";
-import { UpdateAndCreateUserFormSchema } from "../../schema";
-import { CreateUserDefaultValues } from "../create-user-default-values";
-import { useAddUser } from "@/react-query/mutation/users";
-import { useTranslation } from "react-i18next";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
+import { UpdateOrCreateUserFormValues } from '../../types';
+import { UpdateAndCreateUserFormSchema } from '../../schema';
+import { CreateUserDefaultValues } from '../create-user-default-values';
+import { useAddUser } from '@/react-query/mutation/users';
+import { useTranslation } from 'react-i18next';
 
 const CreateUserForm: React.FC = () => {
   const { t } = useTranslation(); // Add this line
@@ -23,11 +23,11 @@ const CreateUserForm: React.FC = () => {
 
   const { mutate: handleAddUser } = useAddUser(
     () => {
-      alert(t("request-success"));
+      alert(t('request-success'));
     },
     () => {
-      alert(t("request-error"));
-    }
+      alert(t('request-error'));
+    },
   );
 
   const onSubmit = (values: UpdateOrCreateUserFormValues) => {
@@ -42,7 +42,7 @@ const CreateUserForm: React.FC = () => {
           htmlFor="username"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("username")}
+          {t('username')}
         </Label>
         <Controller
           name="username"
@@ -51,7 +51,7 @@ const CreateUserForm: React.FC = () => {
             <Input
               id="username"
               type="text"
-              placeholder={t("username-placeholder")}
+              placeholder={t('username-placeholder')}
               {...field}
             />
           )}
@@ -68,7 +68,7 @@ const CreateUserForm: React.FC = () => {
           htmlFor="email"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("email")}
+          {t('email')}
         </Label>
         <Controller
           name="email"
@@ -77,7 +77,7 @@ const CreateUserForm: React.FC = () => {
             <Input
               id="email"
               type="email"
-              placeholder={t("email-placeholder")}
+              placeholder={t('email-placeholder')}
               {...field}
             />
           )}
@@ -93,7 +93,7 @@ const CreateUserForm: React.FC = () => {
           htmlFor="age"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("age")}
+          {t('age')}
         </Label>
         <Controller
           name="age"
@@ -102,7 +102,7 @@ const CreateUserForm: React.FC = () => {
             <Input
               id="age"
               type="number"
-              placeholder={t("age-placeholder")}
+              placeholder={t('age-placeholder')}
               {...field}
             />
           )}
@@ -118,7 +118,7 @@ const CreateUserForm: React.FC = () => {
           htmlFor="role"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("role")}
+          {t('role')}
         </Label>
         <Controller
           name="role"
@@ -127,7 +127,7 @@ const CreateUserForm: React.FC = () => {
             <Input
               id="role"
               type="text"
-              placeholder={t("role-placeholder")}
+              placeholder={t('role-placeholder')}
               {...field}
             />
           )}
@@ -141,7 +141,7 @@ const CreateUserForm: React.FC = () => {
 
       <div className="flex justify-between">
         <Button className="w-full " type="submit">
-          {t("add-user")}
+          {t('add-user')}
         </Button>
       </div>
     </form>

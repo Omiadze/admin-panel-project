@@ -1,6 +1,6 @@
 export const AddUserDefaultValues = {
-  username: "",
-  email: "",
-  age: "",
-  role: "",
+  username: '',
+  email: '',
+  age: '',
+  role: '',
 };

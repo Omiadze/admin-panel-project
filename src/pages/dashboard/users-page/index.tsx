@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -7,13 +7,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Pencil } from "lucide-react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { Controller, useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
-import qs from "qs";
-import { t } from "i18next";
+} from '@/components/ui/table';
+import { Pencil } from 'lucide-react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Controller, useForm } from 'react-hook-form';
+import { Input } from '@/components/ui/input';
+import qs from 'qs';
+import { t } from 'i18next';
 import {
   Pagination,
   PaginationContent,
@@ -22,7 +22,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
+} from '@/components/ui/pagination';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -33,11 +33,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import Loading from "@/components/loading";
-import { useDeleteUser } from "@/react-query/mutation/users";
-import { SearchText } from "../types";
-import { useUsers } from "@/react-query/query";
+} from '@/components/ui/alert-dialog';
+import Loading from '@/components/loading';
+import { useDeleteUser } from '@/react-query/mutation/users';
+import { SearchText } from '../types';
+import { useUsers } from '@/react-query/query';
 
 const UsersPage: React.FC = () => {
   const navigate = useNavigate();
@@ -47,14 +47,14 @@ const UsersPage: React.FC = () => {
   const parsedQueryParams = qs.parse(searchParams.toString());
 
   const { mutate: handleDeleteUser } = useDeleteUser(() => {
-    alert(t("request-success"));
+    alert(t('request-success'));
   });
 
   const { control, watch } = useForm<SearchText>({
     defaultValues: parsedQueryParams,
   });
 
-  const searchQuery = watch("searchText");
+  const searchQuery = watch('searchText');
 
   const { data, isLoading, error } = useUsers({
     page: page,
@@ -65,7 +65,7 @@ const UsersPage: React.FC = () => {
   useEffect(() => {
     if (searchQuery) {
       setSearchParams(
-        qs.stringify({ searchText: searchQuery }, { skipNulls: true })
+        qs.stringify({ searchText: searchQuery }, { skipNulls: true }),
       );
     } else {
       // Remove the searchText parameter when searchQuery is empty
@@ -94,7 +94,7 @@ const UsersPage: React.FC = () => {
                 className="border-primary border-2"
                 onChange={onChange}
                 value={value}
-                placeholder={t("enter-search-text")}
+                placeholder={t('enter-search-text')}
               />
             );
           }}
@@ -106,8 +106,8 @@ const UsersPage: React.FC = () => {
         <div className="mb-8">
           {users.length === 0 ? (
             <div className="text-center p-6">
-              <h2 className="text-lg font-semibold">{t("no-users-found")}</h2>
-              <p className="text-gray-500">{t("try-different-search")}</p>
+              <h2 className="text-lg font-semibold">{t('no-users-found')}</h2>
+              <p className="text-gray-500">{t('try-different-search')}</p>
             </div>
           ) : (
             <>
@@ -115,12 +115,12 @@ const UsersPage: React.FC = () => {
               <Table>
                 <TableHeader className="bg-secondary">
                   <TableRow>
-                    <TableHead className="text-center">{t("name")}</TableHead>
-                    <TableHead className="text-center">{t("email")}</TableHead>
-                    <TableHead className="text-center">{t("age")}</TableHead>
-                    <TableHead className="text-center">{t("role")}</TableHead>
+                    <TableHead className="text-center">{t('name')}</TableHead>
+                    <TableHead className="text-center">{t('email')}</TableHead>
+                    <TableHead className="text-center">{t('age')}</TableHead>
+                    <TableHead className="text-center">{t('role')}</TableHead>
                     <TableHead className="text-center">
-                      {t("actions")}
+                      {t('actions')}
                     </TableHead>
                   </TableRow>
                 </TableHeader>
@@ -142,25 +142,25 @@ const UsersPage: React.FC = () => {
 
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
-                            <Button>{t("delete")}</Button>
+                            <Button>{t('delete')}</Button>
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>
                               <AlertDialogTitle>
-                                {t("delete_confirmation.warning")}
+                                {t('delete_confirmation.warning')}
                               </AlertDialogTitle>
                               <AlertDialogDescription>
-                                {t("delete_confirmation.description")}
+                                {t('delete_confirmation.description')}
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
                               <AlertDialogCancel>
-                                {t("delete_confirmation.cancel")}
+                                {t('delete_confirmation.cancel')}
                               </AlertDialogCancel>
                               <AlertDialogAction
                                 onClick={() => handleDeleteUser(user.id)}
                               >
-                                {t("delete_confirmation.continue")}
+                                {t('delete_confirmation.continue')}
                               </AlertDialogAction>
                             </AlertDialogFooter>
                           </AlertDialogContent>
@@ -186,7 +186,7 @@ const UsersPage: React.FC = () => {
                             if (page > 1) setPage((prev) => prev - 1);
                             window.scrollTo({
                               top: 0,
-                              behavior: "auto",
+                              behavior: 'auto',
                             });
                           }}
                         >
@@ -203,10 +203,10 @@ const UsersPage: React.FC = () => {
                                 setPage(num + 1);
                                 window.scrollTo({
                                   top: 0,
-                                  behavior: "auto",
+                                  behavior: 'auto',
                                 });
                               }}
-                              className={page === num + 1 ? "text-primary" : ""}
+                              className={page === num + 1 ? 'text-primary' : ''}
                             >
                               {num + 1}
                             </PaginationLink>
@@ -226,7 +226,7 @@ const UsersPage: React.FC = () => {
                             if (page < totalPages) setPage((prev) => prev + 1);
                             window.scrollTo({
                               top: 0,
-                              behavior: "auto",
+                              behavior: 'auto',
                             });
                           }}
                         >

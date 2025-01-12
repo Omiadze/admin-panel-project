@@ -1,6 +1,6 @@
-import { ModeToggle } from "@/components/mode-toggle";
-import LanguageSwitcher from "@/layouts/components/language";
-import LogoSvg from "@/layouts/components/logo-svg";
+import { ModeToggle } from '@/components/mode-toggle';
+import LanguageSwitcher from '@/layouts/components/language';
+import LogoSvg from '@/layouts/components/logo-svg';
 
 const AuthHeader = () => {
   return (

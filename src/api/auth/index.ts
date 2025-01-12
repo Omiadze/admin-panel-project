@@ -1,21 +1,21 @@
-import axios from "axios";
-import { httpClient } from "..";
-import { AUTH_ENDPOINTS } from "./index.enum";
-import { LoginFormValues } from "@/pages/login/components/types";
+import axios from 'axios';
+import { httpClient } from '..';
+import { AUTH_ENDPOINTS } from './index.enum';
+import { LoginFormValues } from '@/pages/login/components/types';
 
 // Utility for handling Axios errors
 const handleAxiosError = (error: unknown) => {
   if (axios.isAxiosError(error)) {
-    const message = error.response?.data?.message || "An error occurred";
+    const message = error.response?.data?.message || 'An error occurred';
     const status = error.response?.status;
     if (status) {
       if (status >= 400 && status < 500) {
-        alert("Your Email or password is incorrect");
+        alert('Your Email or password is incorrect');
       }
     }
     throw new Error(message);
   }
-  throw new Error("An unknown error occurred");
+  throw new Error('An unknown error occurred');
 };
 
 // Login function
@@ -39,7 +39,7 @@ export const GetUser = async () => {
 };
 
 // Refresh function
-export const refresh = async (payload: { accessToken: string }) => {
+export const refresh = async ({ payload }: any) => {
   try {
     const { data } = await httpClient.post(AUTH_ENDPOINTS.REFRESH, payload);
     return data;

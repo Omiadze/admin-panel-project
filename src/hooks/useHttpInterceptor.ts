@@ -1,9 +1,9 @@
-import { httpClient } from "@/api";
-import { refresh } from "@/api/auth";
-import { queryClient } from "@/main";
-import { AfterLoginSuccessn } from "@/pages/login/components/utils";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { httpClient } from '@/api';
+import { refresh } from '@/api/auth';
+import { queryClient } from '@/main';
+import { AfterLoginSuccessn } from '@/pages/login/components/utils';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const useHttpInterceptor = () => {
   const navigate = useNavigate();
@@ -15,9 +15,9 @@ export const useHttpInterceptor = () => {
         return res;
       },
       (resErr) => {
-        const refreshToken = localStorage.getItem("refreshToken");
+        const refreshToken = localStorage.getItem('refreshToken');
         console.log(refreshToken);
-        const userId = localStorage.getItem("userId");
+        const userId = localStorage.getItem('userId');
 
         if (resErr.status === 401 && refreshToken) {
           setIsRefreshLoading(true);
@@ -28,12 +28,12 @@ export const useHttpInterceptor = () => {
                 refreshToken: res?.refreshToken,
                 userId: Number(userId),
               });
-              queryClient.invalidateQueries({ queryKey: ["user"] });
+              queryClient.invalidateQueries({ queryKey: ['user'] });
             })
             .catch(() => {
-              localStorage.removeItem("accessToken");
-              localStorage.removeItem("refreshToken");
-              navigate("login");
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('refreshToken');
+              navigate('login');
             })
             .finally(() => {
               setIsRefreshLoading(false);
@@ -44,13 +44,13 @@ export const useHttpInterceptor = () => {
           return Promise.reject(resErr);
         }
         if (!refreshToken) {
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
-          navigate("login");
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          navigate('login');
         }
 
         return resErr;
-      }
+      },
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -1,16 +1,16 @@
-import { Controller, useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useLocation, useNavigate } from "react-router-dom";
-import { LoginDefaultValues } from "../login-default-values";
-import { LoginFormValues } from "../types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginFormSchema } from "./schema";
-import { Label } from "@radix-ui/react-label";
-import { useTranslation } from "react-i18next";
-import { queryClient } from "@/main";
-import { AfterLoginSuccessn } from "../utils";
-import { useLogin } from "@/react-query/mutation/auth";
+import { Controller, useForm } from 'react-hook-form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { LoginDefaultValues } from '../login-default-values';
+import { LoginFormValues } from '../types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { LoginFormSchema } from './schema';
+import { Label } from '@radix-ui/react-label';
+import { useTranslation } from 'react-i18next';
+import { queryClient } from '@/main';
+import { AfterLoginSuccessn } from '../utils';
+import { useLogin } from '@/react-query/mutation/auth';
 
 const LoginForm: React.FC = () => {
   const {
@@ -26,7 +26,7 @@ const LoginForm: React.FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const toNavigate =
-    location?.state?.from?.pathname + location?.state?.from?.search || "/";
+    location?.state?.from?.pathname + location?.state?.from?.search || '/';
 
   const { mutate: handleLogin } = useLogin((res) => {
     AfterLoginSuccessn({
@@ -34,13 +34,13 @@ const LoginForm: React.FC = () => {
       refreshToken: res?.refreshToken,
       userId: res?.id,
     });
-    queryClient.invalidateQueries({ queryKey: ["user"] });
+    queryClient.invalidateQueries({ queryKey: ['user'] });
     setTimeout(() => navigate(toNavigate), 0);
   });
 
   const onSubmit = (values: LoginFormValues) => {
     if (!values.password) {
-      alert("Please fill in the password field");
+      alert('Please fill in the password field');
       return;
     }
     handleLogin(values);
@@ -55,7 +55,7 @@ const LoginForm: React.FC = () => {
           className="
         text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("email")}
+          {t('email')}
         </Label>
         <Controller
           name="username"
@@ -64,7 +64,7 @@ const LoginForm: React.FC = () => {
             <Input
               id="username"
               type="text"
-              placeholder={t("email-placeholder")}
+              placeholder={t('email-placeholder')}
               {...field}
             />
           )}
@@ -81,7 +81,7 @@ const LoginForm: React.FC = () => {
           htmlFor="password"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t("password")}
+          {t('password')}
         </Label>
         <Controller
           name="password"
@@ -90,7 +90,7 @@ const LoginForm: React.FC = () => {
             <Input
               id="password"
               type="password"
-              placeholder={t("password-placeholder")}
+              placeholder={t('password-placeholder')}
               {...field}
             />
           )}
@@ -103,7 +103,7 @@ const LoginForm: React.FC = () => {
       </div>
       <div className="flex justify-between">
         <Button className="w-full " type="submit">
-          {t("sign-in")}
+          {t('sign-in')}
         </Button>
       </div>
     </form>
