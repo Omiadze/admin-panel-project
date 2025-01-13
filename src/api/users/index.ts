@@ -1,3 +1,4 @@
+import { UpdateOrCreateUserFormValues } from '@/pages/dashboard/types';
 import { httpClient } from '..';
 import { GetUsersResponse, User } from './index.types';
 
@@ -66,7 +67,7 @@ export const deleteUserById = async ({ id }: { id: number }) => {
   }
 };
 
-export const addNewUser = async (payload: any) => {
+export const addNewUser = async (payload: UpdateOrCreateUserFormValues) => {
   try {
     const result = await httpClient.post(`/users/add`, payload);
     console.log(result.data);
@@ -76,7 +77,10 @@ export const addNewUser = async (payload: any) => {
   }
 };
 
-export const updateUser = async (id: string | undefined, payload: any) => {
+export const updateUser = async (
+  id: string | undefined,
+  payload: UpdateOrCreateUserFormValues,
+) => {
   try {
     const result = await httpClient.put(`/users/${id}`, payload);
     console.log(result.data);
