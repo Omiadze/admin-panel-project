@@ -16,7 +16,6 @@ export const useHttpInterceptor = () => {
       },
       (resErr) => {
         const refreshToken = localStorage.getItem('refreshToken');
-        console.log(refreshToken);
         const userId = localStorage.getItem('userId');
 
         if (resErr.status === 401 && refreshToken) {

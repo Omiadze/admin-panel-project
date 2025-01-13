@@ -4,7 +4,6 @@ import en from './translations/en.json';
 import ge from './translations/ge.json';
 
 const languageFromUrl = window.location.pathname.split('/')[1] || 'en';
-console.log(languageFromUrl);
 
 i18n.use(initReactI18next).init({
   resources: {

@@ -31,7 +31,6 @@ const CreateUserForm: React.FC = () => {
   );
 
   const onSubmit = (values: UpdateOrCreateUserFormValues) => {
-    console.log(values);
     handleAddUser(values);
   };
 

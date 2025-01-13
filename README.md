@@ -52,7 +52,7 @@ Ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repository/admin-panel-project.git
+   git clone https://github.com/Omiadze/admin-panel-project.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -70,10 +70,12 @@ Ensure you have the following installed:
 # Usage
 
 1. Open the Application
-   Launch the application in your browser. The default URL is: http://localhost:5173.
+
+   - Launch the application in your browser. The default URL is: http://localhost:5173.
 
 2. Log In
-   Log in to access full functionality. You can use dummy credentials from this dataset: https://dummyjson.com/users.
+
+   - Log in to access full functionality. You can use dummy credentials from this dataset: https://dummyjson.com/users.
 
 3. Explore Features
 
@@ -88,4 +90,4 @@ Access the live application at [Admin-Panel](https://admin-panel-site-7.netlify.
 
 # Author
 
-Hi, my name is Teo and I am a front-end-developer.
+Hi, my name is Teo and I am a front-end developer.

@@ -38,7 +38,6 @@ export const getUsers = async ({
       };
     }
   } catch (error) {
-    console.log('Error:', error);
     throw new Error('Failed to fetch users');
   }
 };
@@ -52,7 +51,6 @@ export const getSingleUser = async (id: string | undefined) => {
     const result = await httpClient.get(`/users/${id}`);
     return result.data;
   } catch (error) {
-    console.log('Error:', error);
     throw new Error('Failed to fetch user');
   }
 };
@@ -62,7 +60,6 @@ export const deleteUserById = async ({ id }: { id: number }) => {
     const result = await httpClient.delete(`/users/${id}`);
     console.log(result.data);
   } catch (error) {
-    console.log('Error:', error);
     throw new Error('Failed to delete user');
   }
 };
@@ -72,7 +69,6 @@ export const addNewUser = async (payload: UpdateOrCreateUserFormValues) => {
     const result = await httpClient.post(`/users/add`, payload);
     console.log(result.data);
   } catch (error) {
-    console.log('Error:', error);
     throw new Error('Failed to add user');
   }
 };
@@ -85,7 +81,6 @@ export const updateUser = async (
     const result = await httpClient.put(`/users/${id}`, payload);
     console.log(result.data);
   } catch (error) {
-    console.log('Error:', error);
     throw new Error('Failed to update user');
   }
 };
