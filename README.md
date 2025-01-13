@@ -2,7 +2,9 @@
 
 ## Overview
 
-This project is a fully responsive Admin Panel that implements basic CRUD functionalities and data visualization. The application includes user authentication, management, search functionality, pagination, theme switching, language translation, and a clean UI built with React, TypeScript, Tailwind CSS, and Shadcn UI. 🚀😊
+This project is a fully responsive Admin Panel that implements basic CRUD functionalities and data visualization. The application includes user authentication, management, search functionality, pagination, theme switching, language translation, and a clean UI built with React, TypeScript, Tailwind CSS, and Shadcn UI. 😊
+
+- Note: Since the API used in this project is public and doesn't update dynamically, the visual list of users won't reflect changes after adding, updating, or deleting a user. However, all CRUD operations are simulated using React Query and React Mutation, handling requests.🚀
 
 ## Technologies Used
 
@@ -29,7 +31,6 @@ This project is a fully responsive Admin Panel that implements basic CRUD functi
 
 - List users with details (name, email, age, and status).
 - Add, edit, and delete users using separate form page.
-- Note: Since the API used in this project is public and doesn't update dynamically, the visual list of users won't reflect changes after adding, updating, or deleting a user. However, all CRUD operations are simulated using React Query and React Mutation, handling requests as if they were successful.
 
 ### Additional Features:
 
@@ -68,11 +69,18 @@ Ensure you have the following installed:
 
 # Usage
 
-1.  Open the application in your browser (default URL: `http://localhost:5173`).
-2.  log in to access full functionality. Use this dummy Data to fill username and password: `https://dummyjson.com/users`
-3.  Explore users, add, update and delete on your own.
-4.  Switch between English and Georgian languages as needed.
-5.  Toggle dark mode for a comfortable user experience.
+1. Open the Application
+   Launch the application in your browser. The default URL is: http://localhost:5173.
+
+2. Log In
+   Log in to access full functionality. You can use dummy credentials from this dataset: https://dummyjson.com/users.
+
+3. Explore Features
+
+   - View, add, update, and delete user data.
+   - Switch between English and Georgian languages as needed.
+   - Toggle dark mode for a comfortable user experience.
+   - Search and navigate through pages using pagination.
 
 # Live Site
 
