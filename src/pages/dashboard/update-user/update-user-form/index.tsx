@@ -27,7 +27,7 @@ const UpdateUSerForm: React.FC = () => {
     defaultValues: {
       username: singleUser?.username || '',
       email: singleUser?.email || '',
-      age: singleUser?.age || '',
+      age: singleUser?.age ? String(singleUser.age) : '',
       role: singleUser?.role || '',
     },
     values: singleUser, // Dynamically update form values when `singleUser` changes

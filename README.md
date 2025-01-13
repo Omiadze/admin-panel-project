@@ -77,3 +77,7 @@ Ensure you have the following installed:
 # Live Site
 
 Access the live application at [Admin-Panel](https://admin-panel-site-7.netlify.app/en/login).
+
+# Author
+
+Hi, my name is Teo and I am a front-end-developer.

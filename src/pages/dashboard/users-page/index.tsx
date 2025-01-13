@@ -38,6 +38,7 @@ import Loading from '@/components/loading';
 import { useDeleteUser } from '@/react-query/mutation/users';
 import { SearchText } from '../types';
 import { useUsers } from '@/react-query/query';
+import _ from 'underscore';
 
 const UsersPage: React.FC = () => {
   const navigate = useNavigate();
@@ -172,12 +173,10 @@ const UsersPage: React.FC = () => {
               </Table>
 
               {/* Pagination Controls */}
-              {users.length < 30 ? (
-                <div></div>
-              ) : (
+              {totalPages > 1 && (
                 <div className="flex justify-center mt-4 mb-11">
                   <Pagination>
-                    <PaginationContent className="  h-20 flex justify-center w-full">
+                    <PaginationContent className="h-20 flex justify-center w-full">
                       <PaginationItem>
                         <PaginationPrevious
                           href="#"
@@ -193,7 +192,7 @@ const UsersPage: React.FC = () => {
                           Previous
                         </PaginationPrevious>
                       </PaginationItem>
-                      <div className="overflow-x-scroll pb-2 mt-3  flex   justify-center align-middle ">
+                      <div className="overflow-x-scroll pb-2 mt-3 flex justify-center align-middle">
                         {[...Array(totalPages).keys()].map((num) => (
                           <PaginationItem key={num}>
                             <PaginationLink

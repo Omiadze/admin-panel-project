@@ -10,7 +10,7 @@ const handleAxiosError = (error: unknown) => {
     const status = error.response?.status;
     if (status) {
       if (status >= 400 && status < 500) {
-        alert('Your Email or password is incorrect');
+        alert('Error');
       }
     }
     throw new Error(message);
@@ -18,17 +18,18 @@ const handleAxiosError = (error: unknown) => {
   throw new Error('An unknown error occurred');
 };
 
-// Login function
 export const Login = async (data: LoginFormValues) => {
   try {
     const { data: result } = await httpClient.post(AUTH_ENDPOINTS.LOGIN, data);
+    if (!result) {
+      alert('Invalid username or password. Please try again.');
+    }
     return result;
   } catch (error) {
     handleAxiosError(error);
   }
 };
 
-// Get User function
 export const GetUser = async () => {
   try {
     const { data: user } = await httpClient.get(AUTH_ENDPOINTS.ME);
@@ -38,7 +39,6 @@ export const GetUser = async () => {
   }
 };
 
-// Refresh function
 export const refresh = async ({ payload }: any) => {
   try {
     const { data } = await httpClient.post(AUTH_ENDPOINTS.REFRESH, payload);

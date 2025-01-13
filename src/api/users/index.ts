@@ -18,7 +18,7 @@ export const getUsers = async ({
         users: User[];
         total: number;
       }>(`/users/${searchParam}`);
-      console.log(result.data);
+
       return {
         users: result.data.users,
         total: result.data.total,
@@ -29,7 +29,7 @@ export const getUsers = async ({
         users: User[];
         total: number;
       }>(`/users?limit=${limit}&skip=${skip}`);
-      console.log(result.data);
+
       return {
         users: result.data.users,
         total: result.data.total,
@@ -47,7 +47,7 @@ export const getSingleUser = async (id: string | undefined) => {
     if (!id) {
       throw new Error('User ID is undefined');
     }
-    console.log('payload', id);
+
     const result = await httpClient.get(`/users/${id}`);
     return result.data;
   } catch (error) {
@@ -68,7 +68,6 @@ export const deleteUserById = async ({ id }: { id: number }) => {
 
 export const addNewUser = async (payload: any) => {
   try {
-    console.log('payload', payload);
     const result = await httpClient.post(`/users/add`, payload);
     console.log(result.data);
   } catch (error) {
@@ -79,7 +78,6 @@ export const addNewUser = async (payload: any) => {
 
 export const updateUser = async (id: string | undefined, payload: any) => {
   try {
-    console.log('payload', id);
     const result = await httpClient.put(`/users/${id}`, payload);
     console.log(result.data);
   } catch (error) {

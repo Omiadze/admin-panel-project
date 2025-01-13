@@ -55,7 +55,7 @@ const LoginForm: React.FC = () => {
           className="
         text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {t('email')}
+          {t('username')}
         </Label>
         <Controller
           name="username"
