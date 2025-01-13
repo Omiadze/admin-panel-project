@@ -64,7 +64,7 @@ const LoginForm: React.FC = () => {
             <Input
               id="username"
               type="text"
-              placeholder={t('email-placeholder')}
+              placeholder={t('username-placeholder')}
               {...field}
             />
           )}

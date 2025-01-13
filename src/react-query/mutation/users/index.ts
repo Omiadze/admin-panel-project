@@ -33,7 +33,7 @@ export const useDeleteUser = (onSuccess: () => void) => {
     onSuccess: () => {
       // Invalidate queries after successful delete to refetch data
       queryClient.invalidateQueries({ queryKey: ['user'] });
-      onSuccess(); 
+      onSuccess();
     },
   });
 };
